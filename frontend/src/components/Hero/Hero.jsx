@@ -5,7 +5,7 @@ export default function Hero() {
         <div className="relative w-full h-[600px] md:h-[800px] bg-[#030014] overflow-hidden flex flex-col items-center justify-center font-geist">
             <div className="absolute inset-0 z-0">
                 <DotGrid
-                    dotSize={6}
+                    dotSize={8}
                     gap={40}
                     baseColor="#1e1b4b"
                     activeColor="oklch(0.58 0.23 277.12)"
