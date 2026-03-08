@@ -1,44 +1,81 @@
 # Digitech E-Commerce Platform
 
-A sleek, modern, glassmorphic e-commerce application built emphasizing a beautiful, technology-focused brand identity.
-
-## 🎨 Frontend (Completed)
-The frontend is built with React, Vite, Tailwind CSS, and daisyUI. It features a stunning dark-themed UI paired with vibrant blue neon accents (`oklch(0.58 0.23 277.12)`).
-
-### Core Features Developed
-1. **Global Architecture:**
-   - Next-generation, modular component architecture.
-   - Centralized layout wrapper (`Layout.jsx`).
-   - Tailwind v4 combined with DaisyUI plugin for utility-first responsive styling and UI components.
-
-2. **Navbar component (`Navbar.jsx`):**
-   - Floating, rounded "pill" design with a blurred dark glassmorphic effect.
-   - Dynamic user authentication states showing login/signup buttons or a comprehensive user profile dropdown with shopping cart integration.
-   - Quick "Home" and "Products" navigation links.
-
-3. **Hero Section (`Hero.jsx`):**
-   - Striking Call-To-Action entry with a massive interactive animated background (`DotGrid-JS-TW`).
-   - Deep contrast typography and dynamic buttons.
-
-4. **Product Integration (`ProductGrid.jsx`, `ProductCard.jsx`):**
-   - Clean, spaced, glassmorphic interactive cards with hover transformations.
-   - Simulated star ratings and prominent pricing displays.
-
-5. **Customer Trust Enhancements (`Reviews.jsx`, `FAQ.jsx`):**
-   - Clean profile avatars paired with real reviews.
-   - Interactive, animated accordion logic for common questions and answers.
-
-6. **Footer (`Footer.jsx`):**
-   - Perfectly constrained, beautifully padded minimalist layout matching the `max-w-6xl` design of the rest of the application.
+A sleek, premium, full-stack e-commerce application built with a modern technology-focused brand identity. Digitech combines a powerful Laravel backend with a high-performance React frontend to deliver a seamless shopping experience.
 
 ---
 
-## ⚙️ Backend (Next Steps)
-The next major milestone is building a scalable backend to handle authentication, product inventory, user accounts, and transactions.
+## 🚀 Overview
 
-### Imminent Planning 
-- [ ] Requirements gathering for the database.
-- [ ] Initialization of SQL/NoSQL ORM.
-- [ ] Drafting the core schema migrations (`Users`, `Products`, `Orders`, `Reviews`).
-- [ ] Creation of API endpoints (REST or GraphQL).
-- [ ] Integrating authentication logic.
+Digitech is designed for users who appreciate cutting-edge technology and aesthetic excellence. It features a complete shopping lifecycle, from product discovery and cart management to secure checkout and administrative oversight.
+
+### 🎨 Design Philosophy
+- **Modern Aesthetics**: Glassmorphism, vibrant gradients, and deep contrast typography.
+- **Dynamic Themes**: Fully responsive system with both **Light** (default) and **Dark** modes.
+- **Micro-Animations**: Smooth transitions, hover effects, and interactive background elements (DotGrid).
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- **Framework**: React.js with Vite
+- **Styling**: Tailwind CSS & DaisyUI
+- **Icons**: Lucide React
+- **Auth**: Laravel Sanctum (Token-based)
+- **State Management**: React Hooks & Context API
+
+### Backend
+- **Framework**: Laravel 11
+- **Database**: MySQL
+- **Authentication**: Laravel Sanctum
+- **Filesystem**: Local storage with symbolic link integration for image uploads
+
+---
+
+## ✨ Key Features
+
+### 👤 User Features
+- **Account Management**:
+  - Secure registration and login.
+  - Comphrensive profile dashboard (View, Edit, Delete account).
+- **Shopping Experience**:
+  - Dynamic product catalog with advanced filtering.
+  - Interactive **Cart Platform** (Add, Update Quantity, Remove).
+  - Secure **Checkout Flow** with order creation.
+- **Order History**: Personal dashboard to track previous purchases and order statuses.
+
+### 🔐 Administrative Tools
+- **Admin Dashboard**: High-level overview of store performance with quick-action navigation.
+- **Inventory Management**:
+  - Full CRUD operations for products.
+  - **Image Upload System**: Drag-and-drop support with real-time previews.
+- **Global Order Tracking**: Centralized view of all customer orders with status management.
+
+### 🎨 UI Refinements
+- **Centralized Storage URL**: Robust image resolution across all environments.
+- **Full-Bleed Visuals**: Product images utilize `object-cover` for a premium, retail-grade look.
+- **Responsive Navbar**: Floating glassmorphic design that adapts to user authentication state and theme preferences.
+
+---
+
+## 📦 Setup & Installation
+
+### Backend
+1. `cd backend`
+2. `composer install`
+3. `cp .env.example .env` (Configure your database)
+4. `php artisan migrate --seed`
+5. `php artisan storage:link`
+6. `php artisan serve`
+
+### Frontend
+1. `cd frontend`
+2. `npm install`
+3. `npm run dev`
+
+---
+
+## 📜 Recent Updates
+- **v1.2**: Switched images to `object-cover` for 100% container coverage.
+- **v1.1**: Centralized API and Storage URL resolution for Docker/Sail compatibility.
+- **v1.0**: Initial release with full Admin/User functionality.

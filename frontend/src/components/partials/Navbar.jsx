@@ -1,63 +1,82 @@
-import { Link } from "react-router-dom";
-import { Monitor } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Monitor, ShoppingBag } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
+import { getCart } from "../../api/services";
 
-export default function Navbar({ user }) {
+export default function Navbar() {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        if (user) {
+            getCart().then(res => {
+                const count = res.data.reduce((acc, item) => acc + item.quantity, 0);
+                setCartCount(count);
+            }).catch(() => setCartCount(0));
+        } else {
+            setCartCount(0);
+        }
+    }, [user]);
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/');
+    };
+
     return (
-        <div className="fixed top-6 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 z-[100]">
-            <div className="bg-[#0f0b29]/80 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 flex items-center justify-between shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
-                <div className="flex-1">
-                    <Link to="/" className="font-bold text-xl tracking-wide text-white flex items-center gap-3 hover:opacity-80 transition-opacity uppercase">
-                        <Monitor className="w-6 h-6 text-white" />
+        <div className={`fixed left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 z-[100] transition-all duration-300 top-6`}>
+            <div className="bg-card/80 backdrop-blur-md border border-border rounded-full px-6 py-3 flex items-center justify-between shadow-xl">
+                <div className="flex-1 flex items-center gap-8">
+                    <Link to="/" className="font-bold text-xl tracking-wide text-foreground flex items-center gap-3 hover:opacity-80 transition-opacity uppercase">
+                        <Monitor className="w-6 h-6 text-[oklch(0.58_0.23_277.12)]" />
                         DIGITECH
                     </Link>
+                    
+                    <div className="hidden md:flex items-center gap-6 text-sm font-bold  tracking-widest text-muted-foreground">
+                        <Link to="/products" className="hover:text-foreground transition-colors">Products</Link>
+                        {user && <Link to="/orders" className="hover:text-foreground transition-colors transition-all duration-300">Orders</Link>}
+                    </div>
                 </div>
 
-                <div className="flex items-center gap-6 text-white/90 text-sm font-medium">
+                <div className="flex items-center gap-4 text-foreground text-sm font-medium">
                     {user ? (
-                        <div className="flex-none ml-2 flex items-center gap-2">
+                        <>
+                            <Link to="/cart" className="relative p-2 hover:bg-muted rounded-full transition-colors group">
+                                <ShoppingBag className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                                {cartCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-[oklch(0.58_0.23_277.12)] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center ring-2 ring-background animate-in zoom-in-50 duration-300 shadow-lg shadow-[oklch(0.58_0.23_277.12)]/20">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </Link>
+
                             <div className="dropdown dropdown-end">
-                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle text-white h-8 w-8 min-h-0">
-                                    <div className="indicator">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /> </svg>
-                                        <span className="badge badge-sm indicator-item bg-[oklch(0.58_0.23_277.12)] border-none text-white w-4 h-4 text-[10px] p-0 flex items-center justify-center">8</span>
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar h-8 w-8 min-h-0 ml-2 border-0 focus:ring-2 focus:ring-primary/20">
+                                    <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/50 flex items-center justify-center text-primary font-black text-xs uppercase shadow-sm">
+                                        {user.first_name?.[0]}{user.last_name?.[0]}
                                     </div>
                                 </div>
-                                <div
-                                    tabIndex={0}
-                                    className="card card-compact dropdown-content bg-[#0f0b29]/95 backdrop-blur-md border border-white/10 z-[100] mt-4 w-52 shadow-xl">
-                                    <div className="card-body">
-                                        <span className="text-lg font-bold text-white">8 Items</span>
-                                        <span className="text-white/70">Subtotal: $999</span>
-                                        <div className="card-actions">
-                                            <button className="bg-[oklch(0.58_0.23_277.12)] hover:bg-[oklch(0.50_0.23_277.12)] text-white w-full py-2 rounded-lg text-sm font-medium transition-colors mt-2">View cart</button>
-                                        </div>
+                                 <ul tabIndex="-3" className="menu menu-md dropdown-content bg-card border border-border rounded-2xl z-[100] mt-4 p-2 shadow-2xl backdrop-blur-md min-w-[200px] transition-all duration-300">
+                                    <div className="px-4 py-3 border-b border-border mb-2">
+                                        <p className="text-sm text-foreground font-black truncate">{user.first_name} {user.last_name}</p>
+                                        <p className="text-[10px] text-muted-foreground font-bold tracking-widest mt-0.5 opacity-60 truncate">{user.email}</p>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="dropdown dropdown-end">
-                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar h-8 w-8 min-h-0">
-                                    <div className="w-8 rounded-full border border-[oklch(0.58_0.23_277.12)]">
-                                        <img
-                                            alt="User Avatar"
-                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                                    </div>
-                                </div>
-                                <ul
-                                    tabIndex="-3"
-                                    className="menu menu-sm dropdown-content bg-white rounded-box z-[100] mt-4 w-48 p-2 shadow-lg border border-gray-100">
-                                    <li>
-                                        <Link to={'/profile'} className="justify-between text-black hover:bg-slate-100">
-                                            Profile
-                                        </Link>
-                                    </li>
-                                    <li><Link className="text-red-600 hover:bg-red-50">Logout</Link></li>
+                                    <li className="mb-1"><Link to="/profile" className="text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl py-2 px-4 transition-all duration-200 font-bold text-xs uppercase tracking-widest">Profile Settings</Link></li>
+                                    <li className="mb-1"><Link to="/orders" className="text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl py-2 px-4 transition-all duration-200 font-bold text-xs uppercase tracking-widest">My Orders</Link></li>
+                                    {user.role === 'admin' && (
+                                        <li className="mb-1"><Link to="/admin" className="text-primary hover:bg-primary/10 rounded-xl py-2 px-4 transition-all duration-200 font-bold text-xs uppercase tracking-widest border border-primary/20 bg-primary/5">Admin Dashboard</Link></li>
+                                    )}
+                                    <div className="h-px bg-border my-2 mx-2"></div>
+                                    <li><button onClick={handleLogout} className="text-red-500 hover:text-white hover:bg-red-500 rounded-xl py-2 px-4 transition-all duration-200 font-bold text-xs uppercase tracking-widest mt-1">Logout</button></li>
                                 </ul>
                             </div>
-                        </div>
+                        </>
                     ) : (
-                        <div className="flex gap-3 ml-2 pl-4">
-                            <Link to="/login" className="hover:text-white transition-colors py-1.5">Login</Link>
-                            <Link to="/register" className="bg-white/10 hover:bg-white/20 px-4 py-1.5 rounded-full transition-colors border border-white/10">Sign Up</Link>
+                         <div className="flex gap-4 ml-2 pl-4 border-l border-border">
+                            <Link to="/login" className="hover:text-primary transition-colors py-1.5 px-2 py-2.5 font-bold text-xs uppercase tracking-widest">Login</Link>
+                            <Link to="/register" className="bg-primary hover:opacity-90 text-white px-6 py-2.5 rounded-full transition-all text-xs font-black uppercase tracking-widest shadow-lg shadow-primary/20">Sign Up</Link>
                         </div>
                     )}
                 </div>
