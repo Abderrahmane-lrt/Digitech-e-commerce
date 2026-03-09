@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Monitor, ShoppingBag } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
-import { getCart } from "../../api/services";
+import { getCart } from "@shared/api/services";
 
 export default function Navbar() {
     const { user, logout } = useAuth();

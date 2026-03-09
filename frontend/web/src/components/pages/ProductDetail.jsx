@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, ShieldCheck, Truck, RefreshCcw } from 'lucide-react';
-import { getProduct, addToCart } from '../../api/services';
-import { STORAGE_URL } from '../../api/axios';
+import { getProduct, addToCart } from '@shared/api/services';
+import { STORAGE_URL } from '@shared/api/axios';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 

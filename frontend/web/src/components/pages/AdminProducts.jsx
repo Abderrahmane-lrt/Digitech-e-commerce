@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Package, Plus, Search, Edit, Trash2, SlidersHorizontal, X, Upload, Save, Loader2 } from 'lucide-react';
-import { getProducts, createProduct, updateProduct, deleteProduct } from '../../api/services';
-import { STORAGE_URL } from '../../api/axios';
+import { getProducts, createProduct, updateProduct, deleteProduct } from '@shared/api/services';
+import { STORAGE_URL } from '@shared/api/axios';
 import { toast } from 'react-toastify';
 
 export default function AdminProducts() {

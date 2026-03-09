@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Trash2, ArrowRight, ShoppingBag } from 'lucide-react';
-import { getCart, updateCartItem, removeCartItem, createOrder } from '../../api/services';
-import { STORAGE_URL } from '../../api/axios';
+import { getCart, updateCartItem, removeCartItem, createOrder } from '@shared/api/services';
+import { STORAGE_URL } from '@shared/api/axios';
 import { toast } from 'react-toastify';
 
 export default function CartPage() {

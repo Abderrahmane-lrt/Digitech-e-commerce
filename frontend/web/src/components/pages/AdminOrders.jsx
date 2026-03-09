@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ShoppingBag, Search, Filter, Eye, Clock, CheckCircle, Truck, XCircle, Calendar, DollarSign, Package } from 'lucide-react';
-import { getAdminOrders } from '../../api/services';
+import { getAdminOrders } from '@shared/api/services';
 import { toast } from 'react-toastify';
 
 export default function AdminOrders() {

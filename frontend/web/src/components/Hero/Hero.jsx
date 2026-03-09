@@ -1,6 +1,6 @@
 import DotGrid from '../react-bits/DotGrid-JS-TW';
 import TrueFocus from '../react-bits/TrueFocus';
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "@/context/ThemeContext";
 import { Link } from 'react-router-dom';
 
 export default function Hero() {

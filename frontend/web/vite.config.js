@@ -5,10 +5,13 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  root: resolve(__dirname, '.'),
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@react-bits': resolve(__dirname, 'src/react-bits')
+      '@': resolve(__dirname, './src'),
+      '@react-bits': resolve(__dirname, './src/components/react-bits'),
+      '@shared': resolve(__dirname, '../shared')
     }
   }
 })

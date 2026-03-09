@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Package, Calendar, DollarSign, PackageOpen } from 'lucide-react';
-import { getOrders } from '../../api/services';
-import { STORAGE_URL } from '../../api/axios';
+import { getOrders } from '@shared/api/services';
+import { STORAGE_URL } from '@shared/api/axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 

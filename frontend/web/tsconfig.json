@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@react-bits/*": ["src/components/react-bits/*"]
+      "@react-bits/*": ["src/components/react-bits/*"],
+      "@shared/*": ["../shared/*"]
     }
   },
   "include": ["src"]

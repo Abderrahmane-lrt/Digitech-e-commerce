@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, SlidersHorizontal, X, ShoppingCart } from 'lucide-react';
-import { getProducts, addToCart } from '../../api/services';
-import { STORAGE_URL } from '../../api/axios';
-import { useAuth } from '../../context/AuthContext';
+import { getProducts, addToCart } from '@shared/api/services';
+import { STORAGE_URL } from '@shared/api/axios';
+import { useAuth } from '@/context/AuthContext';
 import { toast } from 'react-toastify';
 
 const PRICE_RANGES = [

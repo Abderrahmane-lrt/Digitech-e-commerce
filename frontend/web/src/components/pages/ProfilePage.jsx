@@ -1,8 +1,8 @@
-import { useAuth } from "../../context/AuthContext";
-import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 import { User, Mail, Shield, Calendar, Moon, Sun, Edit, Save, X, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { updateProfile, deleteAccount } from "../../api/services";
+import { updateProfile, deleteAccount } from "@shared/api/services";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 

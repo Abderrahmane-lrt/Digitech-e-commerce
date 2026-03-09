@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
-import { getProducts } from '../../api/services';
-import { STORAGE_URL } from '../../api/axios';
+import { getProducts } from '@shared/api/services';
+import { STORAGE_URL } from '@shared/api/axios';
 
 export default function ProductGrid() {
     const [products, setProducts] = useState([]);

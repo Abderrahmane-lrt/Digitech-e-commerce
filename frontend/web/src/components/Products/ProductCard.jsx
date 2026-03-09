@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
-import { useAuth } from '../../../src/context/AuthContext';
-import { addToCart } from '../../../src/api/services';
+import { useAuth } from '@/context/AuthContext';
+import { addToCart } from '@shared/api/services';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
